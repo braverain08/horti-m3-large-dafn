@@ -69,7 +69,7 @@ pip install -r requirements.txt
 
 ### 1. Download the Dataset
 
-The **Horti-M3-Large** dataset consists of:
+The experiment uses the **Horti-M3-Large** dataset (Gong et al., 2026), which consists of:
 
 - **RGB images** — 9,384 annotated greenhouse plant images (3 growing seasons)
 - **Agronomic measurements** — 8 physiological indices per observation
@@ -78,22 +78,22 @@ The **Horti-M3-Large** dataset consists of:
 The dataset is hosted on **Zenodo**:
 
 ```
-🔗 https://zenodo.org/doi/[YOUR_ZENODO_DOI]
+🔗 https://zenodo.org/records/17217565
 ```
 
-After downloading, extract to a local directory and set `--data-dir` accordingly.
+Download the ZIP file, extract to a local directory, and set `--data-dir` accordingly.
 
-**Expected directory structure:**
+**Expected directory structure after extraction:**
 
 ```
-horti-m3-large/
+2023-2025 Tomato dataset/
 ├── images/       # RGB images: {plant_id}_{date}_{index}.jpg
 ├── agronomic/    # Growth index CSVs per season
 ├── sensor/       # Environmental sensor data
 └── metadata/     # Plant-wise train/val/test split
 ```
 
-> 📌 The dataset is released under the same MIT License as this code. If you use it in your research, please cite the paper (see [Citation](#citation)).
+> 📌 If you use this dataset in your research, please cite the original paper (see [Citation](#citation)).
 
 ### 2. Build the Dataset (from raw data)
 
