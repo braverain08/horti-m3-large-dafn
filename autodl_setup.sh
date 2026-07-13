@@ -1,6 +1,7 @@
 #!/bin/bash
 # AutoDL 部署脚本
-# 在新 GPU 主机上运行以下命令：
+# 数据集 CSVs 已包含在仓库中，无需重复 01-04 预处理步骤。
+# 在新 GPU 主机上运行：
 #   bash autodl_setup.sh
 
 set -e
@@ -18,14 +19,16 @@ echo "=== 2. 安装依赖 ==="
 pip install -r requirements_autodl.txt
 
 echo "=== 3. 解压数据集 ==="
-# 数据集已上传到 AutoDL 或通过 wget 下载
+DATASET_ZIP="/root/2023-2025 Tomato dataset.zip"
 if [ ! -d "/root/2023-2025 Tomato dataset" ]; then
-    echo "请先上传数据集 ZIP 到 /root/ 目录"
-    echo "或者手动下载:"
-    echo "  wget -O /root/tomato_dataset.zip 'https://zenodo.org/records/17217565/files/2023-2025%20Tomato%20dataset.zip?download=1'"
-    echo "然后解压:"
-    echo "  unzip /root/tomato_dataset.zip -d /root/"
-    exit 1
+    if [ -f "$DATASET_ZIP" ]; then
+        unzip "$DATASET_ZIP" -d /root/
+    else
+        echo "下载数据集 (~5GB)..."
+        wget -O "$DATASET_ZIP" \
+          'https://zenodo.org/records/17217565/files/2023-2025%20Tomato%20dataset.zip?download=1'
+        unzip "$DATASET_ZIP" -d /root/
+    fi
 fi
 
 echo "=== 4. 提取图像特征 (GPU) ==="
@@ -33,7 +36,7 @@ python data/05_extract_features.py \
     --input data/dataset_ready.csv \
     --output data/image_features.npy \
     --data-dir "/root/2023-2025 Tomato dataset/" \
-    --batch_size 64
+    --batch_size 128
 
 echo "=== 5. 提取微调特征 (GPU) ==="
 python data/06_finetune_resnet.py \
@@ -44,4 +47,5 @@ python data/06_finetune_resnet.py \
 
 echo "=== 完成 ==="
 echo "生成的 .npy 文件在 data/ 目录，请下载回本地:"
-echo "  scp root@<your-autodl-ip>:~/horti-m3-large-dafn/data/*.npy ./data/"
+echo "  scp root@<autoDL-IP>:~/horti-m3-large-dafn/data/image_features.npy ./data/"
+echo "  scp root@<autoDL-IP>:~/horti-m3-large-dafn/data/finetuned_logits.npy ./data/"
