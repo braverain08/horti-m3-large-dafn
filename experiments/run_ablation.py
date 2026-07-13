@@ -64,7 +64,7 @@ def load_data(csv_path, feature_npy_path=None, use_sensor=False):
     feat = {}
     if feature_npy_path and os.path.exists(feature_npy_path):
         d = np.load(feature_npy_path, allow_pickle=True).item()
-        feat = {int(k): v for k, v in d.items()}
+        feat = {int(k): np.array(v).flatten() for k, v in d.items()}
         print(f'  Loaded image features: {len(feat)} samples')
     else:
         print(f'  No image features found at {feature_npy_path}')

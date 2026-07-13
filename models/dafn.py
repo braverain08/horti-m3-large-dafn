@@ -46,7 +46,7 @@ class MRDS(nn.Module):
         all_energies = torch.cat(energies, dim=1)
         weights = torch.sigmoid(all_energies)
         norm_weights = weights / (weights.sum(dim=1, keepdim=True) + 1e-8)
-        fused = sum(w * f for w, f in zip(norm_weights.unbind(dim=1), aligned_feats))
+        fused = sum(w.view(-1, 1) * f for w, f in zip(norm_weights.unbind(dim=1), aligned_feats))
         return fused, norm_weights
 
 
