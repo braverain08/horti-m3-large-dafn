@@ -2,6 +2,7 @@
 
 [![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
 [![PyTorch](https://img.shields.io/badge/PyTorch-2.x-orange.svg)](https://pytorch.org/)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.17217565.svg)](https://zenodo.org/records/17217565)
 
 **Code for:** *"Horti-M3-Large: A Large-Scale Benchmark and Adaptive Temporal Fusion Framework for Tomato Stress Diagnosis in Cold-Region Greenhouses"*
 
@@ -154,9 +155,26 @@ If you use this code or the Horti-M3-Large dataset in your research, please cite
   title={Horti-M3-Large: A Large-Scale Benchmark and Adaptive Temporal Fusion Framework for Tomato Stress Diagnosis in Cold-Region Greenhouses},
   author={Gong, Yu and He, Yifei and Zhang, Xuefeng},
   journal={Computers and Electronics in Agriculture},
-  year={2026}
+  year={2026},
+  note={Dataset: \url{https://doi.org/10.5281/zenodo.17217565}}
 }
 ```
+
+---
+
+## Dataset DOI
+
+The **Horti-M3-Large** dataset is archived on Zenodo:
+
+| Identifier | Link |
+|------------|------|
+| **Dataset DOI** | [10.5281/zenodo.17217565](https://zenodo.org/records/17217565) |
+
+To cite the dataset directly, use:
+
+> Gong, Y., He, Y., & Zhang, X. (2026). *Horti-M3-Large: Tomato Stress Dataset for Cold-Region Greenhouses (2023–2025)* [Data set]. Zenodo. https://doi.org/10.5281/zenodo.17217565
+
+> **Tip:** After making this repository public (post-publication), enable the [Zenodo–GitHub integration](https://zenodo.org/account/settings/github/) to auto-archive releases and obtain a separate DOI for the code.
 
 ---
 

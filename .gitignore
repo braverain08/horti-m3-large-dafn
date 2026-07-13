@@ -4,11 +4,13 @@
  *.npz
  *.pkl
  
- # === OS / IDE ===
- .DS_Store
- Thumbs.db
- .idea/
- .vscode/
+# === OS / IDE ===
+.DS_Store
+data/.DS_Store
+data/.idea/
+Thumbs.db
+.idea/
+.vscode/
  *.swp
  *.swo
  *~
@@ -22,10 +24,12 @@
  venv/
  .env/
  
- # === Paper drafts ===
- /paper_q1/
- /paper_q4/
- 
- # === Generated / temp ===
- /data/pyproject.toml
- /data/uv.lock
+# === Paper drafts ===
+/paper_q1/
+/paper_q4/
+experiments/results/
+
+# === Generated / temp ===
+*.json
+/data/pyproject.toml
+/data/uv.lock
