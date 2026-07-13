@@ -1,9 +1,9 @@
- # === Data ===
- *.csv
- *.npy
- *.npz
- *.pkl
- 
+# === Data ===
+*.csv
+*.npy
+*.npz
+*.pkl
+
 # === OS / IDE ===
 .DS_Store
 data/.DS_Store
@@ -11,19 +11,19 @@ data/.idea/
 Thumbs.db
 .idea/
 .vscode/
- *.swp
- *.swo
- *~
- .~*
- 
- # === Python / Virtual env ===
- __pycache__/
- *.py[cod]
- *.egg-info/
- .venv/
- venv/
- .env/
- 
+*.swp
+*.swo
+*~
+.~*
+
+# === Python / Virtual env ===
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.env/
+
 # === Paper drafts ===
 /paper_q1/
 /paper_q4/
