@@ -48,7 +48,7 @@ SENSOR_FEATURES = ['Air_Temperature', 'Relative_Humidity', 'Light_Intensity',
                     'CO2', 'Soil_Moisture', 'Soil_Temperature']
 ALL_FEATURES = AGRONOMIC_FEATURES + SENSOR_FEATURES
 LABEL_MAP = {'Healthy': 0, 'Stress': 1, 'Other': 2}
-NUM_CLASSES = 3; HIDDEN_DIM = 64; LR = 1e-4; EPOCHS = 40; BATCH_SIZE = 16
+NUM_CLASSES = 3; HIDDEN_DIM = 128; LR = 1e-4; EPOCHS = 60; BATCH_SIZE = 16
 class_weights = None
 
 
