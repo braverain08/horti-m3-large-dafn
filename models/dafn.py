@@ -206,6 +206,29 @@ class DAFN_T(nn.Module):
         logits = self.classifier(last_out)
         return logits, weight_list
 
+class DAFN_T_NoMRDS(DAFN_T):
+    """Ablation: DAFN-T without MRDS — simple avg instead of L2-norm scoring."""
+    def forward(self, image_seq, agronomic_seq, sensor_seq=None):
+        B, T = image_seq.shape[:2]
+        enhanced_list = []
+        for t in range(T):
+            img_t = image_seq[:, t, :]
+            agr_t = agronomic_seq[:, t, :]
+            aligned_img = self.fam_image(img_t)
+            aligned_agr = self.fam_agronomic(agr_t)
+            aligned = [aligned_img, aligned_agr]
+            if self.use_sensor and sensor_seq is not None:
+                aligned.append(self.fam_sensor(sensor_seq[:, t, :]))
+            fused_t = torch.stack(aligned).mean(dim=0)
+            enhanced_t = self.res_fusion(fused_t)
+            enhanced_list.append(enhanced_t)
+        enhanced_seq = torch.stack(enhanced_list, dim=1)
+        gru_out, _ = self.gru(enhanced_seq)
+        last_out = gru_out[:, -1, :]
+        logits = self.classifier(last_out)
+        return logits, None
+
+
 
 # ==================== Baseline Models ====================
 
