@@ -1,5 +1,9 @@
 # === Data ===
 *.csv
+!data/dataset_ready.csv
+!data/labeled_agronomic.csv
+!data/sensor_daily.csv
+!data/unified_agronomic.csv
 *.npy
 *.npz
 *.pkl
