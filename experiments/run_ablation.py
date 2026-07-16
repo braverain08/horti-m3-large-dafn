@@ -33,7 +33,7 @@ from sklearn.utils.class_weight import compute_class_weight
 from sklearn.preprocessing import StandardScaler
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(__file__)))
-from models.dafn import DAFN, DAFN_T, DAFN_T_NoMRDS, ImageOnlyClassifier, AgronomicOnlyClassifier
+from models.dafn import DAFN, DAFN_T, ImageOnlyClassifier, AgronomicOnlyClassifier
 
 SEED = 42
 torch.manual_seed(SEED)
@@ -246,12 +246,6 @@ def run_scenario(train, val, feat, missing_rate, use_sensor, has_features):
                             sensor_dim=6, hidden_dim=HIDDEN_DIM,
                             num_classes=NUM_CLASSES, use_sensor=use_sensor)
             results.append(res); print(f'Acc={res["accuracy"]:.4f}')
-            res = run_torch(DAFN_T_NoMRDS, sq_t, sq_v, f'DAFN-T-NoMRDS (miss={missing_rate:.2f})',
-                            window_size=5, image_dim=2048, agronomic_dim=10,
-                            sensor_dim=6, hidden_dim=HIDDEN_DIM,
-                            num_classes=NUM_CLASSES, use_sensor=use_sensor)
-            results.append(res); print(f'Acc={res["accuracy"]:.4f}')
-
         else:
             print('    [DAFN-T] skipped (no sequences)')
     else:
