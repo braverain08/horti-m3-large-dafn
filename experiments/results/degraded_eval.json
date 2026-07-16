@@ -1,61 +1,61 @@
 {
   "clean": {
-    "accuracy": 0.96,
-    "macro_f1": 0.9581546186839627,
+    "accuracy": 0.965,
+    "macro_f1": 0.9627649671533818,
     "n": 200,
     "confusion_matrix": [
       [
-        117,
-        8
+        121,
+        7
       ],
       [
         0,
-        75
+        72
       ]
     ]
   },
   "degraded_blurry": {
     "accuracy": 1.0,
     "macro_f1": 1.0,
-    "n": 200,
+    "n": 90,
     "confusion_matrix": [
       [
-        133,
+        48,
         0
       ],
       [
         0,
-        67
+        42
       ]
     ]
   },
   "degraded_low_brightness": {
     "accuracy": 1.0,
     "macro_f1": 1.0,
-    "n": 200,
+    "n": 90,
     "confusion_matrix": [
       [
-        126,
+        45,
         0
       ],
       [
         0,
-        74
+        45
       ]
     ]
   },
   "degraded_low_contrast": {
     "accuracy": 1.0,
     "macro_f1": 1.0,
-    "n": 200,
+    "n": 90,
     "confusion_matrix": [
       [
-        91,
+        38,
         0
       ],
       [
         0,
-        109
+        52
       ]
     ]
   }

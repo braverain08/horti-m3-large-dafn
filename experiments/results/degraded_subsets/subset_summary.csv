@@ -1,0 +1,5 @@
+subset,count
+clean,200
+degraded_blurry,90
+degraded_low_brightness,90
+degraded_low_contrast,90

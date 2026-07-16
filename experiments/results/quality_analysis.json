@@ -26,9 +26,9 @@
       "max": 53.32964324951172
     },
     "thresholds": {
-      "low_brightness": 128.9123435974121,
-      "high_blur": 1827.3734130859375,
-      "low_contrast": 32.2901725769043
+      "low_brightness": 124.74750633239746,
+      "high_blur": 1479.2935546875,
+      "low_contrast": 29.38429479598999
     }
   },
   "per_image": [
