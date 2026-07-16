@@ -1,0 +1,4 @@
+Table 4 & Table 6 Repeat Experiment Summary (3 seeds)
+
+VisionOnly          : 97.61±0.20%
+DAFN-T-Noisy        : 80.19±3.53%

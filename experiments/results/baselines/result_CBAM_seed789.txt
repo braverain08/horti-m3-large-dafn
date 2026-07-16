@@ -1,0 +1,5 @@
+model=CBAM
+seed=789
+clean_acc=0.974484
+noisy_acc=0.777959
+elapsed=94s

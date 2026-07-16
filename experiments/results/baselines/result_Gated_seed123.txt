@@ -1,0 +1,5 @@
+model=Gated
+seed=123
+clean_acc=0.980456
+noisy_acc=0.745385
+elapsed=113s

@@ -1,0 +1,42 @@
+nohup: ignoring input
+Device: cuda
+Loading...
+  Train:7542 Val:1842 Clean:(7542, 2048),(1842, 2048) Noisy:(1842, 2048)
+
+==================================================
+  Vision-Only (Table 4)
+==================================================
+  Seed 42: clean=97.56% noisy=70.85%
+  Seed 123: clean=97.45% noisy=70.47%
+  Seed 456: clean=97.83% noisy=73.67%
+  >> VisionOnly: Clean=97.61±0.20%
+
+==================================================
+  DAFN-T Noisy (Table 6)
+==================================================
+    [DAFN-T] Seed 42 Ep1 train_acc=0.9812
+    [DAFN-T] Seed 42 Ep10 train_acc=0.9977
+    [DAFN-T] Seed 42 Ep20 train_acc=0.9992
+    [DAFN-T] Seed 42 Ep30 train_acc=0.9985
+    [DAFN-T] Seed 42 Ep40 train_acc=1.0000
+  Seed 42: clean=98.34% noisy=81.85%
+    [DAFN-T] Seed 123 Ep1 train_acc=0.9809
+    [DAFN-T] Seed 123 Ep10 train_acc=0.9980
+    [DAFN-T] Seed 123 Ep20 train_acc=0.9987
+    [DAFN-T] Seed 123 Ep30 train_acc=0.9989
+  Seed 123: clean=98.50% noisy=82.57%
+    [DAFN-T] Seed 456 Ep1 train_acc=0.9825
+    [DAFN-T] Seed 456 Ep10 train_acc=0.9984
+    [DAFN-T] Seed 456 Ep20 train_acc=0.9993
+    [DAFN-T] Seed 456 Ep30 train_acc=0.9999
+    [DAFN-T] Seed 456 Ep40 train_acc=0.9997
+  Seed 456: clean=98.34% noisy=76.14%
+  >> DAFN-T Noisy: Clean=98.39±0.10% Noisy=80.19±3.53%
+
+============================================================
+  SUMMARY
+============================================================
+  VisionOnly          : 97.61±0.20%
+  DAFN-T-Noisy        : 80.19±3.53%
+
+Saved → /root/horti-m3-large-dafn/experiments/results/table46/summary.txt

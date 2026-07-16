@@ -1,0 +1,5 @@
+model=VisionOnly
+seed=123
+clean_acc=0.974484
+noisy_acc=0.704669
+elapsed=48s

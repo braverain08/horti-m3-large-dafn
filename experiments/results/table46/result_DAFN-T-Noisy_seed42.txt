@@ -1,0 +1,7 @@
+model=DAFN-T-Noisy
+seed=42
+clean_acc=0.983352
+noisy_acc=0.818535
+clean_f1=0.982864
+noisy_f1=0.817038
+elapsed=741s

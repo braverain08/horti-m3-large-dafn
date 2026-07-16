@@ -1,0 +1,5 @@
+model=CrossAttn
+seed=789
+clean_acc=0.982085
+noisy_acc=0.717698
+elapsed=181s

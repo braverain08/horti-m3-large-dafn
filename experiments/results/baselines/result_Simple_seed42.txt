@@ -1,0 +1,5 @@
+model=Simple
+seed=42
+clean_acc=0.983713
+noisy_acc=0.735613
+elapsed=92s
