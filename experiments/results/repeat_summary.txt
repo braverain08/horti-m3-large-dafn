@@ -1,0 +1,12 @@
+Repeat Experiment Summary
+Model: DAFN-T (d=128, T=5)
+Seeds: [42, 123, 456, 789, 999]
+Epochs: 50
+Seed  42: 98.89%
+Seed 123: 98.67%
+Seed 456: 98.83%
+Seed 789: 98.67%
+Seed 999: 99.11%
+Mean: 98.83%
+Std:  0.18%
+Mean ± Std: 98.83 ± 0.18%

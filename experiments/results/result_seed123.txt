@@ -1,0 +1,5 @@
+seed=123
+best_val_acc=0.986681
+final_val_acc=0.986681
+final_macro_f1=0.986172
+epochs_completed=25
