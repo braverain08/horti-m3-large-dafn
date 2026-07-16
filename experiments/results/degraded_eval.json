@@ -1,0 +1,62 @@
+{
+  "clean": {
+    "accuracy": 0.96,
+    "macro_f1": 0.9581546186839627,
+    "n": 200,
+    "confusion_matrix": [
+      [
+        117,
+        8
+      ],
+      [
+        0,
+        75
+      ]
+    ]
+  },
+  "degraded_blurry": {
+    "accuracy": 1.0,
+    "macro_f1": 1.0,
+    "n": 200,
+    "confusion_matrix": [
+      [
+        133,
+        0
+      ],
+      [
+        0,
+        67
+      ]
+    ]
+  },
+  "degraded_low_brightness": {
+    "accuracy": 1.0,
+    "macro_f1": 1.0,
+    "n": 200,
+    "confusion_matrix": [
+      [
+        126,
+        0
+      ],
+      [
+        0,
+        74
+      ]
+    ]
+  },
+  "degraded_low_contrast": {
+    "accuracy": 1.0,
+    "macro_f1": 1.0,
+    "n": 200,
+    "confusion_matrix": [
+      [
+        91,
+        0
+      ],
+      [
+        0,
+        109
+      ]
+    ]
+  }
+}
