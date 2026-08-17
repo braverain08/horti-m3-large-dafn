@@ -34,11 +34,14 @@ Cold-region greenhouses face unique challenges: extreme temperature fluctuations
 │   ├── 08_extract_logits3d.py  # Extract logits (3 modalities: + sensor)
 │   └── 99_gradcam.py           # Grad-CAM visualization
 ├── experiments/
-│   └── run.py                  # Main experiment runner
+│   ├── run.py                  # Main experiment runner
+│   ├── run_architecture_ablation.py  # Table 8/9: FAM/MRDS/dimension + temporal ablation
+│   └── run_cross_year.py       # Table 10: cross-year generalization
 ├── models/
 │   ├── __init__.py
 │   ├── dafn.py                 # Original DAFN (dual-branch, frozen backbone)
-│   └── dafn_ft.py              # DAFN-ImageNet & DAFN-Proj (fine-tuned backbone)
+│   ├── dafn_ft.py              # DAFN variants with fine-tuned backbone
+│   └── checkpoint_loader.py    # Load the released DAFN-T checkpoint
 ├── requirements.txt
 ├── .gitignore
 └── README.md
@@ -62,6 +65,22 @@ Install with:
 
 ```bash
 pip install -r requirements.txt
+```
+
+## Pre-trained Models
+
+The released checkpoints are available as GitHub Release assets (tag `v1.0-pretrained`):
+
+- **DAFN-T (d=128)**: [`dafn_t_dim128_best.pth`](https://github.com/braverain08/horti-m3-large-dafn/releases/download/v1.0-pretrained/dafn_t_dim128_best.pth) — temporal fusion model used for robustness, ablation, and MRDS-weight analyses.
+- **Fine-tuned ResNet50**: [`resnet50_finetuned.pth`](https://github.com/braverain08/horti-m3-large-dafn/releases/download/v1.0-pretrained/resnet50_finetuned.pth) — in-domain backbone used to generate fine-tuned visual features and logits.
+
+Place both files under `data/` so the evaluation scripts' default paths work.
+
+Load the released DAFN-T checkpoint with the compatibility loader:
+
+```python
+from models.checkpoint_loader import load_dafn_t
+model = load_dafn_t("data/dafn_t_dim128_best.pth")
 ```
 
 ---
@@ -143,6 +162,24 @@ python experiments/run.py --use_sensor
 # Grad-CAM visualization
 python data/99_gradcam.py
 ```
+
+### 5. Reproduce Paper Tables
+
+| Table | Script |
+|-------|--------|
+| Table 2 (image quality) | `python experiments/quality_analysis.py` |
+| Table 4 (complexity / Pi estimate) | `python experiments/benchmark_raspberrypi.py` |
+| Table 5 (frozen vs. fine-tuned) | `python data/05_extract_features.py` + `python data/06_finetune_resnet.py` + `python experiments/run.py --features data/image_features.npy` |
+| Table 6 (clean modality analysis) | `python experiments/run.py` |
+| Table 7 (degradation robustness) | `python experiments/run_table4_table6.py` + `python experiments/evaluate_degraded.py` |
+| Table 8 (FAM/MRDS/dimension ablation) | `python experiments/run_architecture_ablation.py` |
+| Table 9 (temporal ablation) | `python experiments/run_architecture_ablation.py --variants dafn_t1,dafn_t5` |
+| Table 10 (cross-year) | `python experiments/run_cross_year.py` |
+| Table 11 (mainstream fusion) | `python experiments/run_repeat_baselines.py` + `python experiments/significance_test.py` |
+| Figures 1–5 (Grad-CAM) | `python data/99_gradcam.py` |
+| Figure 6 (MRDS weights) | `python experiments/visualize_mrds_real.py` |
+
+The 2023 splits in Table 10 additionally require fine-tuned visual features for the 2023 season, which can be generated from the Zenodo dataset and passed with `--features-2023`.
 
 ---
 
