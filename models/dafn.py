@@ -207,6 +207,56 @@ class DAFN_T(nn.Module):
         return logits, weight_list
 
 
+class DAFN_T_NoMRDS(DAFN_T):
+    """Ablation: DAFN-T without MRDS — simple averaging instead of L2 scoring."""
+    def forward(self, image_seq, agronomic_seq, sensor_seq=None):
+        B, T = image_seq.shape[:2]
+        enhanced_list = []
+        for t in range(T):
+            img_t = image_seq[:, t, :]
+            agr_t = agronomic_seq[:, t, :]
+            aligned_img = self.fam_image(img_t)
+            aligned_agr = self.fam_agronomic(agr_t)
+            aligned = [aligned_img, aligned_agr]
+            if self.use_sensor and sensor_seq is not None:
+                aligned.append(self.fam_sensor(sensor_seq[:, t, :]))
+            fused_t = torch.stack(aligned).mean(dim=0)
+            enhanced_list.append(self.res_fusion(fused_t))
+        enhanced_seq = torch.stack(enhanced_list, dim=1)
+        gru_out, _ = self.gru(enhanced_seq)
+        logits = self.classifier(gru_out[:, -1, :])
+        return logits, None
+
+
+class DAFN_T_NoFAM(DAFN_T):
+    """Ablation: DAFN-T without FAM — raw modality concat with MRDS weighting."""
+    def __init__(self, window_size=5, **dafn_kwargs):
+        super().__init__(window_size=window_size, **dafn_kwargs)
+        self.use_sensor = dafn_kwargs.get('use_sensor', False)
+        raw_dim = dafn_kwargs.get('image_dim', 2048) + dafn_kwargs.get('agronomic_dim', 10)
+        if self.use_sensor:
+            raw_dim += dafn_kwargs.get('sensor_dim', 6)
+        self.gru = nn.GRU(raw_dim, self.hidden_dim, num_layers=1,
+                          batch_first=True, bidirectional=False)
+
+    def forward(self, image_seq, agronomic_seq, sensor_seq=None):
+        B, T = image_seq.shape[:2]
+        enhanced_list = []
+        weight_list = []
+        for t in range(T):
+            raw = [image_seq[:, t, :], agronomic_seq[:, t, :]]
+            if self.use_sensor and sensor_seq is not None:
+                raw.append(sensor_seq[:, t, :])
+            _, w = self.mrds(*raw)
+            weighted = [w[:, i:i+1] * f for i, f in enumerate(raw)]
+            enhanced_list.append(torch.cat(weighted, dim=1))
+            weight_list.append(w)
+        enhanced_seq = torch.stack(enhanced_list, dim=1)
+        gru_out, _ = self.gru(enhanced_seq)
+        logits = self.classifier(gru_out[:, -1, :])
+        return logits, weight_list
+
+
 # ==================== Baseline Models ====================
 
 class ImageOnlyClassifier(nn.Module):
