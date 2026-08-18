@@ -35,8 +35,6 @@ Cold-region greenhouses face unique challenges: extreme temperature fluctuations
 │   └── 99_gradcam.py           # Grad-CAM visualization
 ├── experiments/
 │   ├── run.py                  # Main experiment runner
-│   ├── run_architecture_ablation.py  # Table 8/9: FAM/MRDS/dimension + temporal ablation
-│   └── run_cross_year.py       # Table 10: cross-year generalization
 ├── models/
 │   ├── __init__.py
 │   ├── dafn.py                 # Original DAFN (dual-branch, frozen backbone)
@@ -172,14 +170,9 @@ python data/99_gradcam.py
 | Table 5 (frozen vs. fine-tuned) | `python data/05_extract_features.py` + `python data/06_finetune_resnet.py` + `python experiments/run.py --features data/image_features.npy` |
 | Table 6 (clean modality analysis) | `python experiments/run.py` |
 | Table 7 (degradation robustness) | `python experiments/run_table4_table6.py` + `python experiments/evaluate_degraded.py` |
-| Table 8 (FAM/MRDS/dimension ablation) | `python experiments/run_architecture_ablation.py` |
-| Table 9 (temporal ablation) | `python experiments/run_architecture_ablation.py --variants dafn_t1,dafn_t5` |
-| Table 10 (cross-year) | `python experiments/run_cross_year.py` |
 | Table 11 (mainstream fusion) | `python experiments/run_repeat_baselines.py` + `python experiments/significance_test.py` |
 | Figures 1–5 (Grad-CAM) | `python data/99_gradcam.py` |
 | Figure 6 (MRDS weights) | `python experiments/visualize_mrds_real.py` |
-
-The 2023 splits in Table 10 additionally require fine-tuned visual features for the 2023 season, which can be generated from the Zenodo dataset and passed with `--features-2023`.
 
 ---
 
